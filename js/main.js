@@ -1,22 +1,41 @@
 // Javascript by Adam Mandelman, 2016
 
+//define variable to hold data
+var myData;
 
-// Populations of four cities I have lived in:
-// Port Vila, Vanuatu: 44,040
-// Byron Bay, Australia: 4,959
-// San Francisco, CA: 852,469
-// Madison, WI: 233,209
+//define Ajax function
+function jQueryAjax(){
+    //basic jQuery ajax method that gets madison.geojson data
+    $.ajax("data/madison.geojson", {
+        dataType: "json",
+        success: callback
+    });
+};
+
+//define callback function
+function callback(response){
+    //set myData to hold the data from the callback
+    myData = response;
+    
+    //print data to console using myData variable
+    console.log(myData);
+    
+};
+    //printing the data to the console from outside the callback results in "undefined"
+    console.log(myData);
+//};
+//call the Ajax function
+$(document).ready(jQueryAjax);
 
 
 //initialize function called when the script loads
 function initialize(){
-    //Call cities after document ready
+ //Call cities after document ready
     cities();
     //Call addEvents after document ready
     addEvents();
     
 };
-
 
 //function to create a table with cities and their populations
 function cities(){
