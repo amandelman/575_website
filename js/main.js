@@ -6,7 +6,7 @@ var myData;
 //define Ajax function
 function jQueryAjax(){
     //basic jQuery ajax method that gets madison.geojson data
-    $.ajax("data/madison.geojson", {
+    $.ajax("data/megacities.geojson", {
         dataType: "json",
         success: callback
     });
@@ -14,16 +14,41 @@ function jQueryAjax(){
 
 //define callback function
 function callback(response){
-    //set myData to hold the data from the callback
+    //set myData to hold the data from the callback 
     myData = response;
     
     //print data to console using myData variable
     console.log(myData);
     
 };
+
     //printing the data to the console from outside the callback results in "undefined"
     console.log(myData);
-//};
+
+//debug_ajax.js 
+function debugCallback(response){
+	
+	$(mydiv).append('GeoJSON data: ' + JSON.stringify(myData));
+};
+
+function debugAjax(){
+	
+//	var mydata;
+
+	$.ajax("data/megacities.geojson", {
+		dataType: "json",
+		success: function(response){
+			
+			debugCallback(myData);
+		}
+	});
+
+	$(mydiv).append('<br>GeoJSON data:<br>' + JSON.stringify(myData));
+};
+
+$(mydiv).append('GeoJSON data: ' + JSON.stringify(myData));
+// end debug_ajax.js
+
 //call the Ajax function
 $(document).ready(jQueryAjax);
 
@@ -36,6 +61,16 @@ function initialize(){
     addEvents();
     
 };
+
+
+
+
+
+
+
+
+
+
 
 //function to create a table with cities and their populations
 function cities(){
