@@ -5,7 +5,7 @@ var myData;
 
 //define Ajax function
 function jQueryAjax(){
-    //basic jQuery ajax method that gets madison.geojson data
+    //basic jQuery ajax method that gets megacities.geojson data
     $.ajax("data/megacities.geojson", {
         dataType: "json",
         success: callback
@@ -25,32 +25,36 @@ function callback(response){
     //printing the data to the console from outside the callback results in "undefined"
     console.log(myData);
 
-//debug_ajax.js 
+//define new callback function for debug exercise's new Ajax method (below)
 function debugCallback(response){
-	
-	$(mydiv).append('GeoJSON data: ' + JSON.stringify(myData));
+
+//when debugCallback is called, add to webpage bold text "Megacities GeoJSON data" on new line AND stringified megacities data on line below that.
+	$(mydiv).append('<br><strong>Megacities GeoJSON data:</strong><br>' + JSON.stringify(myData));
+    
 };
 
-function debugAjax(){
-	
-//	var mydata;
+//define new Ajax function for debug exercise
 
+function debugAjax(){
+
+//jQuery ajax method that gets megacities.geojson data. Upon success it passes the response through the debugCallback function defined above.
 	$.ajax("data/megacities.geojson", {
 		dataType: "json",
 		success: function(response){
 			
-			debugCallback(myData);
+			debugCallback();
 		}
 	});
 
-	$(mydiv).append('<br>GeoJSON data:<br>' + JSON.stringify(myData));
+
 };
 
-$(mydiv).append('GeoJSON data: ' + JSON.stringify(myData));
-// end debug_ajax.js
-
-//call the Ajax function
+//call both Ajax functions
 $(document).ready(jQueryAjax);
+$(document).ready(debugAjax);
+
+
+
 
 
 //initialize function called when the script loads
@@ -61,13 +65,6 @@ function initialize(){
     addEvents();
     
 };
-
-
-
-
-
-
-
 
 
 
